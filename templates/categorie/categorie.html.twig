@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ categorie.name }}  {% endblock %}
+
+{% block body %}
+    <h1>{{ categorie.name }}</h1>
+    <h2>description : {{ categorie.description }}</h2>
+    <br/>
+
+    <h3>Modifier</h3>
+    {{form(form2)}}
+
+{% endblock %}
