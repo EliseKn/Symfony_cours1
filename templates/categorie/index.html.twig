@@ -11,6 +11,8 @@
                 <tr>
                     <th>Nom</th>
                     <th>Description</th>
+                    <th>Action</th>
+
                 </tr>
             </thead>
 
@@ -23,6 +25,11 @@
                     </td>
                     
                     <td>{{ une_categorie.description }}</td>
+
+                    <td>
+                        <a href="{{ path('delete_categorie', {'id': une_categorie.id})}}"</a>
+                    Supprimer 
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

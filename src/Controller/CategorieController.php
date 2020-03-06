@@ -59,7 +59,25 @@ class CategorieController extends AbstractController
         }
 
         else {
-            return $this-> redirectToRoute('categorie');
+            return $this->redirectToRoute('categorie');
         }
     }
+
+    /**
+     * @Route("/categorie/delete/{id}", name="delete_categorie")
+     */
+
+     public function delete(Categorie $categorie=null){
+
+        if ($categorie != null) {
+            $pdo = $this->getDoctrine()->getManager();
+            $pdo->remove($categorie); // insertion/modif = "persist" / supression = "remove"
+            $pdo->flush();
+        }
+        else {
+            return $this->redirectToRoute('categorie');
+        }
+
+        return $this->redirectToRoute('categorie'); 
+     }
 }
