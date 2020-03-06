@@ -81,7 +81,7 @@ class CategorieController extends AbstractController
             $pdo->flush();
 
             //ajout msg qui apparait 
-            $this->addFlash("success", "catégorie supprimée");
+            $this->addFlash("warning", "catégorie supprimée");
         }
         else {
             $this->addFlash("danger", "Catégorie introuvable");

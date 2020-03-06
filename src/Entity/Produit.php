@@ -33,6 +33,12 @@ class Produit
      */
     private $price;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="produits")
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    private $categorie;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +76,18 @@ class Produit
     public function setPrice(string $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

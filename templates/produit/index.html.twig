@@ -12,6 +12,7 @@
                     <th>Nom</th>
                     <th>Description</th>
                     <th>Prix</th>
+                    <th>Catégorie</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -25,9 +26,9 @@
                             {{ un_produit.name }} 
                         </a>
                     </td>
-
                     <td> {{un_produit.description}} </td>
                     <td> {{un_produit.price}} €</td>
+                    <td> {{un_produit.categorie}} </td>
 
                     <td>
                         <a href="{{ path('delete_produit', {'id': un_produit.id})}}"</a>

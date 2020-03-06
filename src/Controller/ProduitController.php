@@ -90,7 +90,7 @@ class ProduitController extends AbstractController
             $pdo->flush();
 
             //ajout msg qui apparait 
-            $this->addFlash("success", "Produit supprimée");
+            $this->addFlash("warning", "Produit supprimée");
         }
         else {
             $this->addFlash("danger", "Produit introuvable");
