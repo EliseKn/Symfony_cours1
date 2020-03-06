@@ -18,7 +18,7 @@ class ProduitController extends AbstractController
         // recupère la Doctrine (gestion de la BDD)
         $pdo = $this->getDoctrine()->getManager();
 
-        $produit = $pdo->getRepository(Produit::class)->findAll();
+        $produits = $pdo->getRepository(Produit::class)->findAll();
 
         /**
          * -> findOneBy(['id' => 2])
@@ -37,7 +37,7 @@ class ProduitController extends AbstractController
         }
 
         return $this->render('produit/index.html.twig', [
-            'produit' => $produit,
+            'produit' => $produits,
             'form_produit_add' => $form->createView()
         ]);
     }
