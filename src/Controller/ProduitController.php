@@ -70,4 +70,20 @@ class ProduitController extends AbstractController
             return $this-> redirectToRoute('produit');
         }
     }
+
+        /**
+     * @Route("/delete/{id}", name="delete_produit")
+     */
+
+    public function delete(Produit $produit=null){
+
+        if ($produit != null) {
+            $pdo = $this->getDoctrine()->getManager();
+            $pdo->remove($produit); // insertion/modif = "persist" / supression = "remove"
+            $pdo->flush();
+        }
+
+        return $this->redirectToRoute('produit'); 
+     }
 }
+

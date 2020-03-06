@@ -74,9 +74,6 @@ class CategorieController extends AbstractController
             $pdo->remove($categorie); // insertion/modif = "persist" / supression = "remove"
             $pdo->flush();
         }
-        else {
-            return $this->redirectToRoute('categorie');
-        }
 
         return $this->redirectToRoute('categorie'); 
      }
