@@ -17,7 +17,6 @@ class CategorieController extends AbstractController
     public function index(Request $request)
     {
         $pdo = $this->getDoctrine()->getManager();
-        $categories = $pdo->getRepository(Categorie::class)->findAll();
 
         $categorie = new Categorie();
         $form2 = $this->createForm(CategorieType::class, $categorie);
@@ -27,7 +26,11 @@ class CategorieController extends AbstractController
         if ( $form2->isSubmitted() && $form2->isValid() ) {
             $pdo->persist($categorie);
             $pdo->flush();
+
+            $this->addFlash("success", "Catégorie ajouté");
         }
+
+        $categories = $pdo->getRepository(Categorie::class)->findAll();
 
         return $this->render('categorie/index.html.twig', [
             'categories' => $categories,
@@ -42,7 +45,7 @@ class CategorieController extends AbstractController
     public function categorie(Request $request, Categorie $categorie=null){
 
         if ($categorie != null) {
-            
+
             $form2 = $this-> createForm(CategorieType::class, $categorie);
             $form2->handleRequest($request);
 
@@ -50,6 +53,8 @@ class CategorieController extends AbstractController
                 $pdo = $this->getDoctrine()->getManager();
                 $pdo->persist($categorie);
                 $pdo->flush();
+
+                $this->addFlash("success", "Catégorie mise à jour");
             }
 
             return $this->render('categorie/categorie.html.twig', [
@@ -59,6 +64,7 @@ class CategorieController extends AbstractController
         }
 
         else {
+            $this->addFlash("danger", "Catégorie introuvable");
             return $this->redirectToRoute('categorie');
         }
     }
@@ -73,6 +79,12 @@ class CategorieController extends AbstractController
             $pdo = $this->getDoctrine()->getManager();
             $pdo->remove($categorie); // insertion/modif = "persist" / supression = "remove"
             $pdo->flush();
+
+            //ajout msg qui apparait 
+            $this->addFlash("success", "catégorie supprimée");
+        }
+        else {
+            $this->addFlash("danger", "Catégorie introuvable");
         }
 
         return $this->redirectToRoute('categorie'); 

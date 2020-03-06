@@ -14,6 +14,13 @@
     
         <div class="container">
 
+            {% for type, messages in app.flashes %}
+                {% for message in messages %}
+                    <p class="alert alert-{{ type }}"> {{ message }} </p>
+                {% endfor %}
+            {% endfor %}
+
+
             {% block body %}{% endblock %}
             
         </div>

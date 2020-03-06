@@ -18,9 +18,8 @@ class ProduitController extends AbstractController
         // recupère la Doctrine (gestion de la BDD)
         $pdo = $this->getDoctrine()->getManager();
 
-        $produits = $pdo->getRepository(Produit::class)->findAll();
-
         /**
+         * $produits = $pdo->getRepository(Produit::class)->findAll();
          * -> findOneBy(['id' => 2])
          * -> findBy(['nom' => 'nom du produit'])
          */
@@ -34,12 +33,17 @@ class ProduitController extends AbstractController
             //le formulaire est envoyé, on le sauvegarde
             $pdo->persist($produit); //prépare
             $pdo->flush(); //exécute
+
+            $this->addFlash("success", "Produit ajouté");
         }
 
+        $produits = $pdo->getRepository(Produit::class)->findAll();
+        
         return $this->render('produit/index.html.twig', [
             'produit' => $produits,
             'form_produit_add' => $form->createView()
         ]);
+
     }
 
     /**
@@ -58,6 +62,8 @@ class ProduitController extends AbstractController
                 $pdo = $this->getDoctrine()->getManager();
                 $pdo->persist($produit);
                 $pdo->flush();
+
+                $this->addFlash("success", "Produit mis à jour");
             }
 
             return $this->render('produit/produit.html.twig', [
@@ -66,6 +72,7 @@ class ProduitController extends AbstractController
             ]);
         }
         else {
+            $this->addFlash("danger", "Produit introuvable");
             //le produit n'existe pas
             return $this-> redirectToRoute('produit');
         }
@@ -81,8 +88,15 @@ class ProduitController extends AbstractController
             $pdo = $this->getDoctrine()->getManager();
             $pdo->remove($produit); // insertion/modif = "persist" / supression = "remove"
             $pdo->flush();
+
+            //ajout msg qui apparait 
+            $this->addFlash("success", "Produit supprimée");
+        }
+        else {
+            $this->addFlash("danger", "Produit introuvable");
         }
 
+        //redirection vers la page produit
         return $this->redirectToRoute('produit'); 
      }
 }
