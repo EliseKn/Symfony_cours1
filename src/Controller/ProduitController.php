@@ -46,6 +46,9 @@ class ProduitController extends AbstractController
 
     }
 
+    // PAGE PRODUIT 
+    // on y arrive au clic sur le nom du produit 
+
     /**
      * @Route("/{id}", name="mon_produit")
      */
@@ -63,7 +66,7 @@ class ProduitController extends AbstractController
                 $pdo->persist($produit);
                 $pdo->flush();
 
-                $this->addFlash("success", "Produit mis à jour");
+                $this->addFlash("success", "Produit mis à jour"); // msg flash / addFlash("type", "message")
             }
 
             return $this->render('produit/produit.html.twig', [
@@ -71,14 +74,17 @@ class ProduitController extends AbstractController
                 'form' => $form->createView()
             ]);
         }
-        else {
-            $this->addFlash("danger", "Produit introuvable");
+        else { 
             //le produit n'existe pas
-            return $this-> redirectToRoute('produit');
+            $this->addFlash("danger", "Produit introuvable"); //msg flash 
+            return $this-> redirectToRoute('produit'); // redirection vers la page produit
         }
     }
 
-        /**
+    // PAGE DE SUPPRESSION 
+    // à l'arrivée sur cette page le produit est supprimé 
+
+    /**
      * @Route("/delete/{id}", name="delete_produit")
      */
 
@@ -90,13 +96,13 @@ class ProduitController extends AbstractController
             $pdo->flush();
 
             //ajout msg qui apparait 
-            $this->addFlash("warning", "Produit supprimée");
+            $this->addFlash("warning", "Produit supprimée"); // msg flash 
         }
         else {
-            $this->addFlash("danger", "Produit introuvable");
+            $this->addFlash("danger", "Produit introuvable"); // msg flash 
         }
 
-        //redirection vers la page produit
+        //redirection vers la page produit 
         return $this->redirectToRoute('produit'); 
      }
 }

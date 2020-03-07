@@ -27,7 +27,7 @@ class CategorieController extends AbstractController
             $pdo->persist($categorie);
             $pdo->flush();
 
-            $this->addFlash("success", "Catégorie ajouté");
+            $this->addFlash("success", "Catégorie ajouté"); // msg Flash 
         }
 
         $categories = $pdo->getRepository(Categorie::class)->findAll();
@@ -37,6 +37,8 @@ class CategorieController extends AbstractController
             'form_categorie_add' => $form2->createView()
         ]);
     }
+
+    // PAGE CATEGORIE 
 
     /**
      * @Route("/categorie/{id}", name="ma_categorie")
@@ -54,7 +56,7 @@ class CategorieController extends AbstractController
                 $pdo->persist($categorie);
                 $pdo->flush();
 
-                $this->addFlash("success", "Catégorie mise à jour");
+                $this->addFlash("success", "Catégorie mise à jour"); // msg flash 
             }
 
             return $this->render('categorie/categorie.html.twig', [
@@ -64,10 +66,12 @@ class CategorieController extends AbstractController
         }
 
         else {
-            $this->addFlash("danger", "Catégorie introuvable");
-            return $this->redirectToRoute('categorie');
+            $this->addFlash("danger", "Catégorie introuvable"); // msg flash 
+            return $this->redirectToRoute('categorie'); // redirection a la page categorie 
         }
     }
+
+    // PAGE SUPPRESSION 
 
     /**
      * @Route("/categorie/delete/{id}", name="delete_categorie")
@@ -80,13 +84,12 @@ class CategorieController extends AbstractController
             $pdo->remove($categorie); // insertion/modif = "persist" / supression = "remove"
             $pdo->flush();
 
-            //ajout msg qui apparait 
-            $this->addFlash("warning", "catégorie supprimée");
+            $this->addFlash("warning", "catégorie supprimée"); //msg flash 
         }
         else {
-            $this->addFlash("danger", "Catégorie introuvable");
+            $this->addFlash("danger", "Catégorie introuvable"); // msg flash 
         }
 
-        return $this->redirectToRoute('categorie'); 
+        return $this->redirectToRoute('categorie'); // redirection 
      }
 }

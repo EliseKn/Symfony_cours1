@@ -14,6 +14,7 @@
     
         <div class="container">
 
+            <!--ajout de msg flash sur toute les pages-->
             {% for type, messages in app.flashes %}
                 {% for message in messages %}
                     <p class="alert alert-{{ type }}"> {{ message }} </p>
@@ -29,3 +30,5 @@
 
     </body>
 </html>
+
+<!-- Bootstrap : ajout du cdn sur le bas.html.twig + import dans config > packages > twig.yaml-->

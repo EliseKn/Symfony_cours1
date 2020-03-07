@@ -1,3 +1,5 @@
 twig:
-    form_themes: ['bootstrap_4_horizontal_layout.html.twig']
     default_path: '%kernel.project_dir%/templates'
+    
+    # import de bootstrap 
+    form_themes: ['bootstrap_4_horizontal_layout.html.twig'] 

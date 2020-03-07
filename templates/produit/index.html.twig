@@ -22,9 +22,11 @@
                 
                 <tr>
                     <td>
+                    <!-- création du lien pour aller vers la page produit / ici 'mon_produit' = le nom de la page (mis dans le controller) -->
                         <a href="{{path('mon_produit', {'id': un_produit.id})}}">
                             {{ un_produit.name }} 
                         </a>
+
                     </td>
                     <td> {{un_produit.description}} </td>
                     <td> {{un_produit.price}} €</td>
@@ -44,7 +46,7 @@
         {% else %}
             <p>Il n'y a aucun produit</p>
         {% endif %}
-
+        
         <h2>Ajouter un produit</h2>
         {{ form(form_produit_add)}}
 
